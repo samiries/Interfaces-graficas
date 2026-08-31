@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GestorTareas));
             lbltitulo = new Label();
             lbltarea = new Label();
             txttarea = new TextBox();
@@ -37,6 +38,8 @@
             dtp = new DateTimePicker();
             btnagregar = new Button();
             lst = new ListView();
+            nombre = new ColumnHeader();
+            prioridad = new ColumnHeader();
             btneliminar = new Button();
             btncompletar = new Button();
             SuspendLayout();
@@ -55,7 +58,7 @@
             lbltarea.AutoSize = true;
             lbltarea.Location = new Point(169, 42);
             lbltarea.Name = "lbltarea";
-            lbltarea.Size = new Size(37, 15);
+            lbltarea.Size = new Size(38, 15);
             lbltarea.TabIndex = 1;
             lbltarea.Text = "Tarea:";
             // 
@@ -65,6 +68,8 @@
             txttarea.Name = "txttarea";
             txttarea.Size = new Size(155, 23);
             txttarea.TabIndex = 2;
+            txttarea.TextChanged += txttarea_TextChanged;
+            txttarea.KeyPress += txttarea_KeyPress;
             // 
             // lblprioridad
             // 
@@ -77,12 +82,14 @@
             // 
             // cmbprioridad
             // 
+            cmbprioridad.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbprioridad.FormattingEnabled = true;
             cmbprioridad.Items.AddRange(new object[] { "Baja", "Media", "Alta" });
             cmbprioridad.Location = new Point(255, 68);
             cmbprioridad.Name = "cmbprioridad";
             cmbprioridad.Size = new Size(121, 23);
             cmbprioridad.TabIndex = 4;
+            cmbprioridad.SelectedIndexChanged += cmbprioridad_SelectedIndexChanged;
             // 
             // lblfecha
             // 
@@ -98,7 +105,7 @@
             dtp.Format = DateTimePickerFormat.Short;
             dtp.Location = new Point(255, 100);
             dtp.Name = "dtp";
-            dtp.Size = new Size(200, 23);
+            dtp.Size = new Size(96, 23);
             dtp.TabIndex = 6;
             // 
             // btnagregar
@@ -113,11 +120,27 @@
             // 
             // lst
             // 
+            lst.Columns.AddRange(new ColumnHeader[] { nombre, prioridad });
+            lst.FullRowSelect = true;
             lst.Location = new Point(169, 174);
             lst.Name = "lst";
             lst.Size = new Size(298, 97);
             lst.TabIndex = 8;
             lst.UseCompatibleStateImageBehavior = false;
+            lst.View = View.Details;
+            lst.ItemCheck += lst_ItemCheck;
+            lst.SelectedIndexChanged += lst_SelectedIndexChanged;
+            // 
+            // nombre
+            // 
+            nombre.Text = "Nombre";
+            nombre.Width = 150;
+            // 
+            // prioridad
+            // 
+            prioridad.Text = "Prioridad";
+            prioridad.TextAlign = HorizontalAlignment.Center;
+            prioridad.Width = 130;
             // 
             // btneliminar
             // 
@@ -127,6 +150,7 @@
             btneliminar.TabIndex = 9;
             btneliminar.Text = "Eliminar";
             btneliminar.UseVisualStyleBackColor = true;
+            btneliminar.Click += btneliminar_Click;
             // 
             // btncompletar
             // 
@@ -136,11 +160,14 @@
             btncompletar.TabIndex = 10;
             btncompletar.Text = "Completar";
             btncompletar.UseVisualStyleBackColor = true;
+            btncompletar.Click += btncompletar_Click;
             // 
             // GestorTareas
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(612, 344);
             Controls.Add(btncompletar);
             Controls.Add(btneliminar);
@@ -153,6 +180,7 @@
             Controls.Add(txttarea);
             Controls.Add(lbltarea);
             Controls.Add(lbltitulo);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "GestorTareas";
             Text = "GestorTareas";
             ResumeLayout(false);
@@ -172,5 +200,7 @@
         private ListView lst;
         private Button btneliminar;
         private Button btncompletar;
+        private ColumnHeader nombre;
+        private ColumnHeader prioridad;
     }
 }
