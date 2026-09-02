@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Drawing.Text;
 using System.Text;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace Interfaz_grafica
 {
@@ -27,6 +28,7 @@ namespace Interfaz_grafica
             btnagregar.Enabled = false;
             btnborrar.Enabled = false;
             btnmodificar.Enabled = false;
+            btnbuscar.Enabled = false;
 
         }
 
@@ -120,6 +122,10 @@ namespace Interfaz_grafica
                 btnmodificar.Enabled = true;
                 btnborrar.Enabled = true;
                 btnagregar.Enabled = false;
+                txtlaboratorio.Enabled = false;
+                txtcodigo.Enabled = false;
+                cmbtipo.SelectedIndex = 0;
+
             }
 
 
@@ -149,7 +155,10 @@ namespace Interfaz_grafica
                     encontrado = true;
                     break;
                 }
+
             }
+
+            txtbuscar.Clear();
 
             if (!encontrado)
             {
@@ -159,7 +168,14 @@ namespace Interfaz_grafica
 
         private void txtbuscar_TextChanged(object sender, EventArgs e)
         {
-
+            if (txtbuscar.Text != "")
+            {
+                btnbuscar.Enabled = true;
+            }
+            else
+            {
+                btnbuscar.Enabled = false;
+            }
         }
     }
 
